@@ -70,8 +70,7 @@ public class MovementOne : MonoBehaviour
         {
             characterCollider.size = new Vector3(1, 1f, 1);
         }
-        if (crouch) return;
-        characterRigidbody.AddRelativeForce(Time.fixedDeltaTime * input * speed,0,0,ForceMode.Impulse);
+        if(!crouch) characterRigidbody.AddRelativeForce(Time.fixedDeltaTime * input * speed, 0, 0, ForceMode.Impulse);
         characterRigidbody.velocity = new Vector3(0, characterRigidbody.velocity.y, 0);
     }
 
