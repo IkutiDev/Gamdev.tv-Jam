@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,9 @@ public class MovementOne : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
+    [Foldout("ProgrammerStuff")]
     [SerializeField] private Transform groundCheckTransform;
+    [Foldout("ProgrammerStuff")]
     [SerializeField] private LayerMask groundLayer;
     BoxCollider characterCollider;
     Rigidbody characterRigidbody;
