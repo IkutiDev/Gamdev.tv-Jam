@@ -37,7 +37,7 @@ AnimatorStateTransition:
     m_ConditionEvent: currentSpeed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: isGrounded
+    m_ConditionEvent: isFalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2888083285836140913}
@@ -65,7 +65,7 @@ AnimatorStateTransition:
     m_ConditionEvent: currentSpeed
     m_EventTreshold: 0.1
   - m_ConditionMode: 1
-    m_ConditionEvent: isGrounded
+    m_ConditionEvent: isFalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6772815033120673198}
@@ -291,7 +291,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isGrounded
+  - m_Name: isFalling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
