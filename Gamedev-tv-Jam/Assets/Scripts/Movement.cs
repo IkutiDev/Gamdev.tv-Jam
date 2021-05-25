@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovementOne : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;

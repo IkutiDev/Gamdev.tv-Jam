@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4716185501989969659}
   - component: {fileID: 347643797602993557}
   m_Layer: 0
-  m_Name: female_tilesheet_0
+  m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4716185501989969657}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 7.8822327, z: 1}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4716185502267051421}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -626950047591269070, guid: e23dce4dadf0a504ea87ad06fe044800, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3194ed8067426884abf76f9e201078b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 4716185502267051422}
   - component: {fileID: 4716185502267051394}
   - component: {fileID: 4716185502267051393}
+  - component: {fileID: 862649785861810964}
   m_Layer: 0
   m_Name: Brunhilda Junior
   m_TagString: Untagged
@@ -237,6 +238,20 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &862649785861810964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716185502267051420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1610e933ade36904ebb46e239eca644d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
+  currentHealth: 0
 --- !u!1 &4716185502542585979
 GameObject:
   m_ObjectHideFlags: 0
