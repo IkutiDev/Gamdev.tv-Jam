@@ -7,6 +7,8 @@ public class HealthUI : MonoBehaviour
 {
     [SerializeField] private Text healthText;
     [SerializeField] private GameObject heartContaintersParent;
+    [SerializeField] private Sprite fullHeartContainer;
+    [SerializeField] private Sprite emptyHeartContainer;
 
     int healthPerHeart;
     int heartsCount;
@@ -28,11 +30,11 @@ public class HealthUI : MonoBehaviour
         {
             if (disabledHearts <= 0)
             {
-                heartContaintersParent.transform.GetChild(i).gameObject.SetActive(true);
+                heartContaintersParent.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = fullHeartContainer;
             }
             else
             {
-                heartContaintersParent.transform.GetChild(i).gameObject.SetActive(false);
+                heartContaintersParent.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = emptyHeartContainer;
                 disabledHearts--;
             }
 
