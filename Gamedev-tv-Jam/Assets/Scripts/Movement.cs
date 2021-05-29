@@ -15,21 +15,24 @@ public class Movement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     BoxCollider characterCollider;
     Rigidbody characterRigidbody;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] GameObject model;
+   // SpriteRenderer spriteRenderer;
     Animator animator;
     float input;
     bool isGrounded = true;
     bool isFalling = false;
     bool jump = false;
     bool crouch = false;
+    Vector3 standardSize;
     //Movement for left and right + jumping
     // Start is called before the first frame update
     void Start()
     {
         characterRigidbody = GetComponent<Rigidbody>();
         characterCollider = GetComponent<BoxCollider>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+       // spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
+        standardSize = characterCollider.size;
     }
 
     // Update is called once per frame
@@ -38,7 +41,9 @@ public class Movement : MonoBehaviour
         input = Input.GetAxisRaw("Horizontal");
         if (input != 0)
         {
-            spriteRenderer.flipX = input < 0;
+            if (input < 0) model.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+            else model.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            //    spriteRenderer.flipX = input < 0;
         }
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -74,17 +79,17 @@ public class Movement : MonoBehaviour
         {
             if (isGrounded)
             {
-                spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x,0.28f, spriteRenderer.transform.localPosition.z);
+                model.transform.localPosition = new Vector3(0, 0, 0);
                 characterCollider.size = new Vector3(1, 0.6f, 1);
             }
         }
         else
         {
-            spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x, 0.08f, spriteRenderer.transform.localPosition.z);
-            characterCollider.size = new Vector3(1, 1f, 1);
+            model.transform.localPosition = new Vector3(0, -0.5f, 0);
+            characterCollider.size = standardSize;
         }
 
-        if(!crouch) characterRigidbody.AddRelativeForce(Time.fixedDeltaTime * input * speed, 0, 0, ForceMode.Impulse);
+        if(!crouch) characterRigidbody.AddRelativeForce(0, 0, Time.fixedDeltaTime * input * speed, ForceMode.Impulse);
         animator.SetFloat("currentSpeed", characterRigidbody.velocity.magnitude);
         animator.SetBool("isFalling", isFalling);
         characterRigidbody.velocity = new Vector3(0, characterRigidbody.velocity.y, 0);
