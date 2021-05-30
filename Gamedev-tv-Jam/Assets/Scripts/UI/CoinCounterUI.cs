@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoinCounterUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private Text coinCounterText;
+
+    int coinCount=0;
+
+    private void Start()
     {
-        
+        coinCounterText.text = "0";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncreaseCointCount()
     {
-        
+        coinCount++;
+        coinCounterText.text = coinCount.ToString();
     }
 }

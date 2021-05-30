@@ -17,7 +17,10 @@ public class Energy : MonoBehaviour
     {
         energyUI.UpdateEnergyBar(maxEnergy, currentEnergy);
     }
-
+    public int GetCurrentEnergy()
+    {
+        return currentEnergy;
+    }
     public void IncreaseEnergy(int increase)
     {
         currentEnergy += increase;

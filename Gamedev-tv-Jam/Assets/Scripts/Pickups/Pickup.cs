@@ -24,7 +24,7 @@ namespace Gamedev.Pickups
                 switch (pickupType)
                 {
                     case PickupType.Coin:
-                        Debug.Log("Picking up coin +1");
+                        FindObjectOfType<CoinCounterUI>().IncreaseCointCount();
                         break;
                     case PickupType.Health:
                         other.GetComponent<Health>().Heal(amount);
