@@ -1,28 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Gamedev.Combat
 {
+    [Serializable]
+    public class PunchData
+    {
+        public int damage=5;
+        public int energyGained=10;
+    }
     public class PlayerFighter : MonoBehaviour
     {
-        //[SerializeField] private 
-        [SerializeField] private float rangeAttackCooldown;
-        [SerializeField] private int energyRequiredForSpecialAttack;
-        [SerializeField] private AnimationClip punchOneAnimation;
-        [SerializeField] private AnimationClip punchTwoAnimation;
-        [SerializeField] private AnimationClip punchThreeAnimation;
-        [SerializeField] private Transform fistTransform;
+        #region Meele Attack
+        [SerializeField] private Transform leftFistTransform;
+        [SerializeField] private Transform rightFistTransform;
+        [SerializeField] PunchData punchOne;
+        [SerializeField] PunchData punchTwo;
+        [SerializeField] PunchData punchThree;
+        bool canAttack = true;
+
+        int punchState = 0;
+        #endregion
+        #region Range Attack
         [SerializeField] private Transform pistolEndTransform;
         [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private float rangeAttackCooldown;
         [SerializeField] private CooldownUI cooldownUI;
-        [SerializeField] private GameObject model;
-        Animator animator;
-        bool punchOneImpact;
-        bool punchOne=false;
-        bool punchTwo = false;
-        bool punchThree = false;
 
         float rangeAttackTimer = Mathf.Infinity;
+        #endregion
+        #region Special Attack
+        [SerializeField] private int energyRequiredForSpecialAttack;
+        #endregion
+        [SerializeField] private GameObject model;
+        Animator animator;
+
+
+
+        
 
         private void Start()
         {
@@ -35,24 +51,23 @@ namespace Gamedev.Combat
         }
         public void BasicAttack()
         {
-            if (punchThree ==false && punchTwo == false &&punchOne==false)
+            if (canAttack)
             {
-                punchOne = true;
-                animator.SetBool("punchOne", punchOne);
-                Invoke("DisablePunch1", punchOneAnimation.length);
+                canAttack = false;
+                punchState++;
+                animator.SetInteger("punch", punchState);
             }
-            else if(punchTwo == false && punchThree == false)
-            {
-                punchTwo = true;
-                animator.SetBool("punchTwo", punchTwo);
-                Invoke("DisablePunch2", punchTwoAnimation.length);
-            }
-            else if(punchThree == false)
-            {
-                punchThree = true;
-                animator.SetBool("punchThree", punchThree);
-                Invoke("DisablePunch3", punchThreeAnimation.length);
-            }
+        }
+        private void Next()
+        {
+            canAttack = true;
+        }
+
+        private void Stop()
+        {
+            punchState = 0;
+            animator.SetInteger("punch", punchState);
+            canAttack = true;
         }
         public void RangeAttack()
         {
@@ -61,7 +76,11 @@ namespace Gamedev.Combat
                 rangeAttackTimer = 0f;
                 animator.SetTrigger("rangeAttack");
             }
-            //Do range attack
+        }
+        public void RangeAttackAnimTrigger()
+        {
+            var projectile = Instantiate(projectilePrefab, pistolEndTransform.position, projectilePrefab.transform.rotation);
+            projectile.GetComponent<Projectile>().goLeft = model.transform.localRotation.eulerAngles.y >= 180f;
         }
         public void SpecialAttack()
         {
@@ -72,53 +91,49 @@ namespace Gamedev.Combat
                 GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
             }
         }
-        private void DisablePunch1()
+        public void Punch_Impact(int punchState)
         {
-            punchOne = false;
-            animator.SetBool("punchOne", punchOne);
-        }
-        private void DisablePunch2()
-        {
-            punchTwo = false;
-            animator.SetBool("punchTwo", punchTwo);
-        }
-        private void DisablePunch3()
-        {
-            punchThree = false;
-            animator.SetBool("punchThree", punchThree);
-        }
-        public void Punch_1_Impact()
-        {
-            Debug.Log("Punch Impact");
-            var targets =Physics.SphereCastAll(fistTransform.position, .4f,Vector3.forward);
+            Vector3 fistPosition;
+            int energyGained;
+            int damage;
+            switch (punchState)
+            {
+                case 1:
+                    fistPosition = leftFistTransform.position;
+                    damage = punchOne.damage;
+                    energyGained = punchOne.energyGained;
+                    break;
+                case 2:
+                    fistPosition = rightFistTransform.position;
+                    damage = punchTwo.damage;
+                    energyGained = punchTwo.energyGained;
+                    break;
+                case 3:
+                    fistPosition = rightFistTransform.position;
+                    damage = punchThree.damage;
+                    energyGained = punchThree.energyGained;
+                    break;
+                default:
+                    Debug.LogError("WTF?");
+                    return;
+            }
+            var targets =Physics.SphereCastAll(fistPosition, .4f,Vector3.forward);
             foreach(var target in targets)
             {
                 if (target.collider == null) continue;
                 if (target.collider.GetComponent<Health>() == null) continue;
                 if (target.collider.tag == "Player") continue;
 
-                target.collider.GetComponent<Health>().TakeDamage(10);
-                GetComponent<Energy>().IncreaseEnergy(5);
+                target.collider.GetComponent<Health>().TakeDamage(damage);
+                GetComponent<Energy>().IncreaseEnergy(energyGained);
             }
-            punchOneImpact = true;
+            
+            Next();
 
         }
-        public void Punch_1_Finish()
+        public void Punch_Finish(int punchState)
         {
-            punchOneImpact = false;
-        }
-        public void RangeAttackAnimTrigger()
-        {
-            var projectile=Instantiate(projectilePrefab, pistolEndTransform.position, projectilePrefab.transform.rotation);
-            projectile.GetComponent<Projectile>().goLeft = model.transform.localRotation.eulerAngles.y>=180f;
-        }
-        private void OnDrawGizmos()
-        {
-            if (punchOneImpact)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(fistTransform.position, .4f);
-            }
+            Stop();
         }
     }
 }
