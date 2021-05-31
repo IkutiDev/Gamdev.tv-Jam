@@ -24,8 +24,8 @@ namespace Gamedev.Movement
         Rigidbody characterRigidbody;
         Animator animator;
         [HideInInspector] public float input;
-        [HideInInspector] public bool jump = false;
-        [HideInInspector] public bool crouch = false;
+        public bool jump = false;
+        public bool crouch = false;
         bool isFalling = false;
         Vector3 standardSize;
         //Movement for left and right + jumping

@@ -32,17 +32,29 @@ namespace Gamedev.Control
             {
                 movement.crouch = false;
             }
-            if (Input.GetMouseButtonDown(0))
+            if (movement.GroundCheck())
             {
-                playerFighter.BasicAttack();
+                if (movement.crouch) return;
+                //Dont do attacks if you press mid crouch/jump and after you finish them attack fires
+                if (Input.GetMouseButtonDown(0))
+                {
+                    playerFighter.BasicAttack();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    playerFighter.RangeAttack();
+                }
+                if (Input.GetMouseButtonDown(2))
+                {
+                    playerFighter.SpecialAttack();
+                }
             }
-            if (Input.GetMouseButtonDown(1))
+            else
             {
-                playerFighter.RangeAttack();
-            }
-            if (Input.GetMouseButtonDown(2))
-            {
-                playerFighter.SpecialAttack();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    playerFighter.JumpAttack();
+                }
             }
         }
     }

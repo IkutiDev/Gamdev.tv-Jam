@@ -43,5 +43,13 @@ namespace Gamedev.Combat
         {
 
         }
+        private void JumpingAttackAnimTrigger()
+        {
+            playerFighter.Punch_Impact(-1);
+        }
+        private void JumpingAttackAnimTriggerFinish()
+        {
+            playerFighter.JumpingAttack_Finish();
+        }
     }
 }

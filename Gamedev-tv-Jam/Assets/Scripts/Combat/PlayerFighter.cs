@@ -33,6 +33,10 @@ namespace Gamedev.Combat
         #region Special Attack
         [SerializeField] private int energyRequiredForSpecialAttack;
         #endregion
+        #region Jump Attack
+        [SerializeField] PunchData jumpingPunch;
+        bool canJumpAttack = true;
+        #endregion
         [SerializeField] private GameObject model;
         Animator animator;
 
@@ -56,6 +60,14 @@ namespace Gamedev.Combat
                 canAttack = false;
                 punchState++;
                 animator.SetInteger("punch", punchState);
+            }
+        }
+        public void JumpAttack()
+        {
+            if (canJumpAttack)
+            {
+                canJumpAttack = false;
+                animator.SetTrigger("jumpingAttack");
             }
         }
         private void Next()
@@ -113,11 +125,16 @@ namespace Gamedev.Combat
                     damage = punchThree.damage;
                     energyGained = punchThree.energyGained;
                     break;
+                case -1:
+                    fistPosition = rightFistTransform.position;
+                    damage = jumpingPunch.damage;
+                    energyGained = jumpingPunch.energyGained;
+                    break;
                 default:
                     Debug.LogError("WTF?");
                     return;
             }
-            var targets =Physics.SphereCastAll(fistPosition, .4f,Vector3.forward);
+            var targets =Physics.SphereCastAll(fistPosition, .7f,Vector3.forward);
             foreach(var target in targets)
             {
                 if (target.collider == null) continue;
@@ -127,13 +144,17 @@ namespace Gamedev.Combat
                 target.collider.GetComponent<Health>().TakeDamage(damage);
                 GetComponent<Energy>().IncreaseEnergy(energyGained);
             }
-            
+            if (punchState == -1) return;
             Next();
 
         }
         public void Punch_Finish(int punchState)
         {
             Stop();
+        }
+        public void JumpingAttack_Finish()
+        {
+            canJumpAttack = true;
         }
     }
 }
