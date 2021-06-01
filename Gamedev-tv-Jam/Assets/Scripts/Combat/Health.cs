@@ -1,3 +1,4 @@
+using Gamedev.Control;
 using Gamedev.UI;
 using NaughtyAttributes;
 using System.Collections;
@@ -13,12 +14,15 @@ namespace Gamedev.Combat
         [Foldout("ProgrammerStuff")]
         [InfoBox("Assign only to player!", EInfoBoxType.Warning)]
         [SerializeField] private HealthUI healthUI;
+        [Foldout("ProgrammerStuff")]
+        [SerializeField] private GameObject model;
         #endregion
         [SerializeField] private GameObject deathVFX;
         [SerializeField] private int maxHealth = 300;
         [ProgressBar("Health", "maxHealth", EColor.Red)]
         [ReadOnly] public int currentHealth;
 
+        bool canTakeDamage = true;
         private void Awake()
         {
             currentHealth = maxHealth;
@@ -31,9 +35,11 @@ namespace Gamedev.Combat
         {
             //Play SFX here
             //Play animation of getting hit here
+            if (!canTakeDamage) return;
             currentHealth = Mathf.Max(currentHealth - damage, 0);
             if (healthUI != null) healthUI.UpdateHpBar(maxHealth, currentHealth);
             if (currentHealth == 0) Death();
+            else StartCoroutine(Blinking());
         }
         public void Heal(int healthGained)
         {
@@ -55,6 +61,21 @@ namespace Gamedev.Combat
             {
                 Destroy(gameObject);
             }
+        }
+
+        private IEnumerator Blinking()
+        {
+            if (GetComponent<PlayerController>() != null) canTakeDamage = false;
+            int blinkCounter = 0;
+            while (blinkCounter<3)
+            {
+                model.SetActive(false);
+                yield return new WaitForSeconds(0.2f);
+                model.SetActive(true);
+                yield return new WaitForSeconds(0.2f);
+                blinkCounter++;
+            }
+            canTakeDamage = true;
         }
     }
 }

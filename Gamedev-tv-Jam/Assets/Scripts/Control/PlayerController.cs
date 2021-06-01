@@ -51,6 +51,7 @@ namespace Gamedev.Control
             }
             else
             {
+                if (movement.crouch) return;
                 if (Input.GetMouseButtonDown(0))
                 {
                     playerFighter.JumpAttack();

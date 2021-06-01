@@ -599,6 +599,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100455421}
   m_CullTransparentMesh: 1
+--- !u!1 &117172922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6478640246483588631, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
+  m_PrefabInstance: {fileID: 4716185503004992304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171052297
 GameObject:
   m_ObjectHideFlags: 0
@@ -5585,6 +5590,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 862649785861810964, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 117172922}
+    - target: {fileID: 862649785861810964, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 185041756}
@@ -5644,6 +5653,10 @@ PrefabInstance:
       propertyPath: cooldownUI
       value: 
       objectReference: {fileID: 1337760848}
+    - target: {fileID: 8689015184830454681, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
 --- !u!1001 &7315920589022583925
