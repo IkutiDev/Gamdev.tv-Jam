@@ -32,6 +32,11 @@ namespace Gamedev.Combat
         #endregion
         #region Special Attack
         [SerializeField] private int energyRequiredForSpecialAttack;
+        [SerializeField] private int dmgIncrease=10;
+        [SerializeField] private float dmgIncreaseTime=5f;
+        [SerializeField] private GameObject specialVFX;
+        bool canSpecialAttack = true;
+        bool increaseDamage = false;
         #endregion
         #region Jump Attack
         [SerializeField] PunchData jumpingPunch;
@@ -93,15 +98,29 @@ namespace Gamedev.Combat
         {
             var projectile = Instantiate(projectilePrefab, pistolEndTransform.position, projectilePrefab.transform.rotation);
             projectile.GetComponent<Projectile>().goLeft = model.transform.localRotation.eulerAngles.y >= 180f;
+            if (increaseDamage) projectile.GetComponent<Projectile>().damage += dmgIncrease;
         }
         public void SpecialAttack()
         {
-            if (GetComponent<Energy>().GetCurrentEnergy() >= energyRequiredForSpecialAttack)
+            if (canSpecialAttack)
             {
-                //Do special attack
-                animator.SetTrigger("specialAttack");
-                GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
+                if (GetComponent<Energy>().GetCurrentEnergy() >= energyRequiredForSpecialAttack)
+                {
+                    canSpecialAttack = false;
+                    StartCoroutine(IncreaseDamage());
+                    animator.SetTrigger("specialAttack");
+                    GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
+                }
             }
+        }
+        private IEnumerator IncreaseDamage()
+        {
+            specialVFX.SetActive(true);
+            increaseDamage = true;
+            yield return new WaitForSeconds(dmgIncreaseTime);
+            increaseDamage = false;
+            canSpecialAttack = true;
+            specialVFX.SetActive(false);
         }
         public void Punch_Impact(int punchState)
         {
@@ -134,6 +153,7 @@ namespace Gamedev.Combat
                     Debug.LogError("WTF?");
                     return;
             }
+            if (increaseDamage) damage = damage + dmgIncrease;
             var targets =Physics.SphereCastAll(fistPosition, .7f,Vector3.forward);
             foreach(var target in targets)
             {

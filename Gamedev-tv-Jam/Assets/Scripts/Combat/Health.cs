@@ -39,7 +39,13 @@ namespace Gamedev.Combat
             currentHealth = Mathf.Max(currentHealth - damage, 0);
             if (healthUI != null) healthUI.UpdateHpBar(maxHealth, currentHealth);
             if (currentHealth == 0) Death();
-            else StartCoroutine(Blinking());
+            else
+            {
+                if (model != null)
+                {
+                    StartCoroutine(Blinking());
+                }
+            }
         }
         public void Heal(int healthGained)
         {
