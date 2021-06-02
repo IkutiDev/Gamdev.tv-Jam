@@ -32,9 +32,10 @@ namespace Gamedev.Combat
         #endregion
         #region Special Attack
         [SerializeField] private int energyRequiredForSpecialAttack;
-        [SerializeField] private int dmgIncrease=10;
+        [SerializeField] private int dmgModifier=2;
         [SerializeField] private float dmgIncreaseTime=5f;
-        [SerializeField] private GameObject specialVFX;
+        [SerializeField] private Color specialColor;
+        private Color normalColor;
         bool canSpecialAttack = true;
         bool increaseDamage = false;
         #endregion
@@ -42,7 +43,8 @@ namespace Gamedev.Combat
         [SerializeField] PunchData jumpingPunch;
         bool canJumpAttack = true;
         #endregion
-        [SerializeField] private GameObject model;
+        [SerializeField] private GameObject modelParent;
+        [SerializeField] private SkinnedMeshRenderer model;
         Animator animator;
 
 
@@ -52,6 +54,7 @@ namespace Gamedev.Combat
         private void Start()
         {
             animator = GetComponentInChildren<Animator>();
+            normalColor = model.materials[1].color;
         }
         private void Update()
         {
@@ -97,8 +100,8 @@ namespace Gamedev.Combat
         public void RangeAttackAnimTrigger()
         {
             var projectile = Instantiate(projectilePrefab, pistolEndTransform.position, projectilePrefab.transform.rotation);
-            projectile.GetComponent<Projectile>().goLeft = model.transform.localRotation.eulerAngles.y >= 180f;
-            if (increaseDamage) projectile.GetComponent<Projectile>().damage += dmgIncrease;
+            projectile.GetComponent<Projectile>().goLeft = modelParent.transform.localRotation.eulerAngles.y >= 180f;
+            if (increaseDamage) projectile.GetComponent<Projectile>().damage *= projectile.GetComponent<Projectile>().damage * dmgModifier;
         }
         public void SpecialAttack()
         {
@@ -115,12 +118,12 @@ namespace Gamedev.Combat
         }
         private IEnumerator IncreaseDamage()
         {
-            specialVFX.SetActive(true);
+            model.materials[1].color = specialColor;
             increaseDamage = true;
             yield return new WaitForSeconds(dmgIncreaseTime);
             increaseDamage = false;
             canSpecialAttack = true;
-            specialVFX.SetActive(false);
+            model.materials[1].color = normalColor;
         }
         public void Punch_Impact(int punchState)
         {
@@ -153,7 +156,7 @@ namespace Gamedev.Combat
                     Debug.LogError("WTF?");
                     return;
             }
-            if (increaseDamage) damage = damage + dmgIncrease;
+            if (increaseDamage) damage = damage * dmgModifier;
             var targets =Physics.SphereCastAll(fistPosition, .7f,Vector3.forward);
             foreach(var target in targets)
             {
