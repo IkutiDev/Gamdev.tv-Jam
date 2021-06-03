@@ -161,10 +161,11 @@ namespace Gamedev.Combat
             foreach(var target in targets)
             {
                 if (target.collider == null) continue;
-                if (target.collider.GetComponent<Health>() == null) continue;
+                var health = target.collider.GetComponent<Health>();
+                if (health == null) continue;
                 if (target.collider.tag == "Player") continue;
-
-                target.collider.GetComponent<Health>().TakeDamage(damage);
+                if (health.IsDead()) continue;
+                health.TakeDamage(damage);
                 GetComponent<Energy>().IncreaseEnergy(energyGained);
             }
             if (punchState == -1) return;

@@ -23,6 +23,11 @@ namespace Gamedev.Combat
         [ReadOnly] public int currentHealth;
 
         bool canTakeDamage = true;
+        bool isDead=false;
+        public bool IsDead()
+        {
+            return isDead;
+        }
         private void Awake()
         {
             currentHealth = maxHealth;
@@ -56,6 +61,7 @@ namespace Gamedev.Combat
         private void Death()
         {
             //Death anim
+            isDead = true;
             GetComponentInChildren<Animator>().SetTrigger("death");
             if (deathVFX != null) Instantiate(deathVFX);
             if (gameObject.tag == "Player")
@@ -65,7 +71,7 @@ namespace Gamedev.Combat
             //If player pause game and give game over screen
             else
             {
-                Destroy(gameObject);
+                Destroy(gameObject,5f);
             }
         }
 
