@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     public int damage;
     [SerializeField] private float speed;
@@ -15,7 +15,8 @@ public class Projectile : MonoBehaviour
     }
     void Update()
     {
-        if (goLeft) {
+        if (goLeft)
+        {
             transform.position = new Vector3(transform.position.x - (speed * Time.deltaTime), transform.position.y, transform.position.z);
         }
         else
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.GetComponent<Health>())
         {
-            if (other.tag == "Player") return;
+            if (other.tag != "Player") return;
             other.GetComponent<Health>().TakeDamage(damage);
         }
     }

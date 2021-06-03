@@ -63,7 +63,10 @@ namespace Gamedev.Combat
         private void Death()
         {
             //Death anim
-            StopCoroutine(blinkingCoroutine);
+            if (blinkingCoroutine!=null)
+            {
+                StopCoroutine(blinkingCoroutine);
+            }
             if (model != null)
             {
                 model.SetActive(true);
@@ -75,11 +78,11 @@ namespace Gamedev.Combat
             if (gameObject.tag == "Player")
             {
                 GameManager.Instance.GameOver();
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
             }
             else
             {
-                GetComponent<Enemy>().enemyStage.OnEnemyDeath(transform.position);
+                GetComponent<Enemy>().enemyStage.OnEnemyDeath(transform.position, GetComponent<Enemy>().shouldDrop, GetComponent<Enemy>().shouldCount);
                 Destroy(gameObject,5f);
             }
         }
