@@ -262,13 +262,14 @@ MonoBehaviour:
   rangeAttackCooldown: 5
   cooldownUI: {fileID: 0}
   energyRequiredForSpecialAttack: 20
-  dmgIncrease: 10
+  dmgModifier: 2
   dmgIncreaseTime: 5
-  specialVFX: {fileID: 1732266315}
+  specialColor: {r: 0.46226418, g: 0.02035121, b: 0.02035121, a: 1}
   jumpingPunch:
     damage: 5
     energyGained: 10
-  model: {fileID: 5598581731031581137}
+  modelParent: {fileID: 5598581731031581137}
+  model: {fileID: 8689015184830454681}
 --- !u!114 &7613796808612747867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +427,11 @@ Transform:
 --- !u!1 &6478640246483588631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1773152992579037847, guid: 17d93ec0825c7324fbbc905c1876c9e4, type: 3}
+  m_PrefabInstance: {fileID: 4716185502312316032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8689015184830454681 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4172256284338775833, guid: 17d93ec0825c7324fbbc905c1876c9e4, type: 3}
   m_PrefabInstance: {fileID: 4716185502312316032}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4716185503404338062

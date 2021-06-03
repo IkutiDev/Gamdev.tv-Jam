@@ -9,6 +9,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     public bool goLeft;
     // Update is called once per frame
+    private void Start()
+    {
+        Destroy(gameObject, 10f);
+    }
     void Update()
     {
         if (goLeft) {

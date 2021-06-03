@@ -63,7 +63,10 @@ namespace Gamedev.Combat
         private void Death()
         {
             //Death anim
-            StopCoroutine(blinkingCoroutine);
+            if (blinkingCoroutine!=null)
+            {
+                StopCoroutine(blinkingCoroutine);
+            }
             if (model != null)
             {
                 model.SetActive(true);
