@@ -8,4 +8,8 @@ public class MushroomAnimatorHelper : MonoBehaviour
     {
         GetComponentInParent<MushroomController>().BiteImpact();
     } 
+    private void Spawned()
+    {
+        GetComponentInParent<MushroomController>().enabled = true;
+    }
 }

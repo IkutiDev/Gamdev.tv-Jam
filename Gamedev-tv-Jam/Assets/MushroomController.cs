@@ -15,6 +15,7 @@ public class MushroomController : MonoBehaviour
 
     PlayerController player;
     bool wait = false;
+    float currentSpeed=0f;
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
@@ -23,7 +24,15 @@ public class MushroomController : MonoBehaviour
     void Update()
     {
         if (GetComponent<Health>().IsDead()) return;
-        if (wait) return;
+        if (wait)
+        {
+            currentSpeed = 0f;
+            if (GetComponentInChildren<Animator>() != null)
+            {
+                GetComponentInChildren<Animator>().SetFloat("currentSpeed", currentSpeed);
+            }
+            return;
+        }
         var lookPos = player.transform.position - transform.position;
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
@@ -32,8 +41,11 @@ public class MushroomController : MonoBehaviour
         {
 
             transform.position += transform.forward * speed * Time.deltaTime;
-
-
+            currentSpeed = speed;
+            if (GetComponentInChildren<Animator>() != null)
+            {
+                GetComponentInChildren<Animator>().SetFloat("currentSpeed", currentSpeed);
+            }
 
             if (Vector3.Distance(transform.position, player.transform.position) <= maxDistance)
             {
