@@ -20,15 +20,15 @@ namespace Gamedev.Control
         void Update()
         {
             movement.input = Input.GetAxisRaw("Horizontal");
-            if (Input.GetKeyDown(KeyCode.Space) && movement.GroundCheck())
+            if (Input.GetAxisRaw("Jump")>0 && movement.GroundCheck())
             {
                 movement.jump = true;
             }
-            if (Input.GetKey(KeyCode.LeftControl) && movement.GroundCheck())
+            if (Input.GetAxisRaw("Crouch")>0 && movement.GroundCheck())
             {
                 movement.crouch = true;
             }
-            if (Input.GetKeyUp(KeyCode.LeftControl))
+            if (movement.crouch&&Input.GetAxisRaw("Crouch")==0)
             {
                 movement.crouch = false;
             }
@@ -36,22 +36,23 @@ namespace Gamedev.Control
             {
                 if (movement.crouch) return;
                 //Dont do attacks if you press mid crouch/jump and after you finish them attack fires
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetAxisRaw("Attack")>0)
                 {
                     playerFighter.BasicAttack();
                 }
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetAxisRaw("Range Attack") > 0)
                 {
                     playerFighter.RangeAttack();
                 }
-                if (Input.GetMouseButtonDown(2))
+                if (Input.GetAxisRaw("Special Attack") > 0)
                 {
                     playerFighter.SpecialAttack();
                 }
             }
             else
             {
-                if (Input.GetMouseButtonDown(0))
+                if (movement.crouch) return;
+                if (Input.GetAxisRaw("Attack") > 0)
                 {
                     playerFighter.JumpAttack();
                 }

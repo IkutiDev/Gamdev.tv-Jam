@@ -39,9 +39,9 @@ namespace Gamedev.Combat
         {
             playerFighter.RangeAttackAnimTrigger();
         }
-        private void SpecialAttackAnimTrigger()
+        private void SpecialAttackAnimTriggerFinish()
         {
-
+            //playerFighter.SpecialAttack_Finish();
         }
         private void JumpingAttackAnimTrigger()
         {
