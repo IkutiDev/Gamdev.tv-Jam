@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class Stage : MonoBehaviour
@@ -18,6 +19,7 @@ public class Stage : MonoBehaviour
     [SerializeField] private Transform[] flyingSpawners;
     [SerializeField] private float enemySpawnerTimeIntervals=5f;
     [SerializeField] private int maxEnemyCount=3;
+    [SerializeField] private TMP_Text stageClearedText;
 
     List<Enemy> enemies;
     List<Pickup> pickups;
@@ -60,7 +62,7 @@ public class Stage : MonoBehaviour
     {
         if (currentEnemyCount == 0)
         {
-            Debug.LogError("Cant kill enemy if current count of them is 0, something is wrong!");
+            Debug.LogError("Cant kill enemy if current count of them is 0, something is wrong!"+currentEnemyCount);
             return;
         }
         DropPickup(deathPosition);
@@ -149,9 +151,15 @@ public class Stage : MonoBehaviour
     }
     private void EnableCameraAndDisableWalls()
     {
+        stageClearedText.enabled = true;
+        Invoke("HideText", 5f);
         CVC.Follow = alienTransform;
         CVC.LookAt = alienTransform;
         LeftWall.isTrigger = true;
         RightWall.isTrigger = true;
+    }
+    private void HideText()
+    {
+        stageClearedText.enabled = false;
     }
 }

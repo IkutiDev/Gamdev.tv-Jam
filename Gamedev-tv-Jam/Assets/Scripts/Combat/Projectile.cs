@@ -12,11 +12,11 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         if (goLeft) {
-            transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - (speed * Time.deltaTime), transform.position.y, transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -24,6 +24,7 @@ namespace Gamedev.Combat
 
         bool canTakeDamage = true;
         bool isDead=false;
+        Coroutine blinkingCoroutine;
         public bool IsDead()
         {
             return isDead;
@@ -41,6 +42,7 @@ namespace Gamedev.Combat
             //Play SFX here
             //Play animation of getting hit here
             if (!canTakeDamage) return;
+            if (isDead) return;
             currentHealth = Mathf.Max(currentHealth - damage, 0);
             if (healthUI != null) healthUI.UpdateHpBar(maxHealth, currentHealth);
             if (currentHealth == 0) Death();
@@ -48,7 +50,7 @@ namespace Gamedev.Combat
             {
                 if (model != null)
                 {
-                    StartCoroutine(Blinking());
+                    blinkingCoroutine=StartCoroutine(Blinking());
                 }
             }
         }
@@ -61,6 +63,11 @@ namespace Gamedev.Combat
         private void Death()
         {
             //Death anim
+            StopCoroutine(blinkingCoroutine);
+            if (model != null)
+            {
+                model.SetActive(true);
+            }
             isDead = true;
             GetComponentInChildren<Animator>().SetTrigger("death");
             if (deathVFX != null) Instantiate(deathVFX);
