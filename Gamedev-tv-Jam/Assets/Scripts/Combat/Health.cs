@@ -82,7 +82,7 @@ namespace Gamedev.Combat
             }
             else
             {
-                GetComponent<Enemy>().enemyStage.OnEnemyDeath(transform.position);
+                GetComponent<Enemy>().enemyStage.OnEnemyDeath(transform.position, GetComponent<Enemy>().shouldDrop, GetComponent<Enemy>().shouldCount);
                 Destroy(gameObject,5f);
             }
         }

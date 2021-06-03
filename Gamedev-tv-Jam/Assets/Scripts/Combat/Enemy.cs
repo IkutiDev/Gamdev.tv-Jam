@@ -7,6 +7,10 @@ public class Enemy : MonoBehaviour
 {
     public bool isFlying = false;
 
+    public bool shouldDrop = true;
+
+    public bool shouldCount = true;
+
     public Stage enemyStage;
 
     private void OnTriggerEnter(Collider other)

@@ -58,15 +58,15 @@ public class Stage : MonoBehaviour
             StartCoroutine(WaitUntilEnemiesAreDead());
         }
     }
-    public void OnEnemyDeath(Vector3 deathPosition)
+    public void OnEnemyDeath(Vector3 deathPosition,bool shouldDrop, bool shouldCount)
     {
         if (currentEnemyCount == 0)
         {
             Debug.LogError("Cant kill enemy if current count of them is 0, something is wrong!"+currentEnemyCount);
             return;
         }
-        DropPickup(deathPosition);
-        currentEnemyCount--;
+        if(shouldDrop) DropPickup(deathPosition);
+        if(shouldCount)currentEnemyCount--;
     }
     private void DropPickup(Vector3 pickupDropPosition)
     {
@@ -102,8 +102,15 @@ public class Stage : MonoBehaviour
         var spawnedEnemy=Instantiate(enemyToSpawn, spawner.position, spawner.localRotation, spawner);
         spawnedEnemy.enemyStage = this;
         enemiesSpawned++;
-        if (currentEnemyCount == -1) currentEnemyCount = 1;
-        else currentEnemyCount++;
+        if (spawnedEnemy.shouldCount)
+        {
+            if (currentEnemyCount == -1) currentEnemyCount = 1;
+            else currentEnemyCount++;
+        }
+        else
+        {
+            enemySpawnerTimer += 2f;
+        }
     }
     private Transform ChooseSpawner(Enemy enemy)
     {
