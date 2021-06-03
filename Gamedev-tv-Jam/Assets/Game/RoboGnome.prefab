@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8498cccda8ebfc4e8f44581f5225da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomPosition: {x: 0, y: 0, z: 0}
   speed: 4
   damping: 10
 --- !u!65 &6500921366663559063
@@ -132,6 +131,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1065295055552051941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727907903465731874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aaba140bc160d4fae728906ae8f065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 4457667804901284210, guid: a067891f5b4037a449f79f1cbb3e0bf3, type: 3}
+  projectilePrefab: {fileID: 6199845869457523950, guid: db35000128d970646b71a484aa17b402, type: 3}
+  fistTransform: {fileID: 1697319911281760361}
+  modelParent: {fileID: 494100392564471288}
 --- !u!1001 &494100391979059827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,5 +212,10 @@ GameObject:
 --- !u!4 &95099841083239832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 15d74996f28149b40a2ffe9cd305e4aa, type: 3}
+  m_PrefabInstance: {fileID: 494100391979059827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1697319911281760361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1249030671317242394, guid: 15d74996f28149b40a2ffe9cd305e4aa, type: 3}
   m_PrefabInstance: {fileID: 494100391979059827}
   m_PrefabAsset: {fileID: 0}

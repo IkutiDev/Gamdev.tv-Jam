@@ -3960,11 +3960,11 @@ PrefabInstance:
     - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 432538195653414837, guid: 63f0957858861cd4ca245090681e3c0b, type: 3}
+      objectReference: {fileID: 3781887145942355517, guid: 706feace99fd25b4192a60e2418c15bd, type: 3}
     - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
       propertyPath: enemiesToSpawn.Array.data[1]
       value: 
-      objectReference: {fileID: 432538195653414837, guid: 63f0957858861cd4ca245090681e3c0b, type: 3}
+      objectReference: {fileID: 3781887145942355517, guid: 706feace99fd25b4192a60e2418c15bd, type: 3}
     - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
       propertyPath: enemiesToSpawn.Array.data[2]
       value: 
@@ -4285,6 +4285,14 @@ PrefabInstance:
     - target: {fileID: 4716185502267051421, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716185502542585979, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598581731031581137, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6032044354112824633, guid: 3d18a9af9a55ace42bbcba6bc19a012f, type: 3}
       propertyPath: cooldownUI
