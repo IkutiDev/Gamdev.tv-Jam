@@ -78,7 +78,7 @@ namespace Gamedev.Combat
             if (gameObject.tag == "Player")
             {
                 GameManager.Instance.GameOver();
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
             }
             else
             {
