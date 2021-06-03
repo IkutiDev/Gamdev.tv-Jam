@@ -64,13 +64,15 @@ namespace Gamedev.Combat
             isDead = true;
             GetComponentInChildren<Animator>().SetTrigger("death");
             if (deathVFX != null) Instantiate(deathVFX);
+            //If player pause game and give game over screen
             if (gameObject.tag == "Player")
             {
                 GameManager.Instance.GameOver();
+                Time.timeScale = 0;
             }
-            //If player pause game and give game over screen
             else
             {
+                GetComponent<Enemy>().enemyStage.OnEnemyDeath(transform.position);
                 Destroy(gameObject,5f);
             }
         }

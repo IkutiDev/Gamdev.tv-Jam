@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3034657460959086064}
   - component: {fileID: 4457667804901284209}
   - component: {fileID: 4457667804901284210}
+  - component: {fileID: 2185552143831696719}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3539187818613646373}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -1.1, y: 4.95, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!33 &1007033526054580538
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3539187818613646373}
-  m_Mesh: {fileID: -5216581434543980006, guid: 3211d3a88a93ce847ae4ab029f091a13, type: 3}
+  m_Mesh: {fileID: 7001609335099770725, guid: 2fca639c4b7748240926c9180c6d9b34, type: 3}
 --- !u!23 &3034657460959086064
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,8 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2653651044934150266, guid: 3211d3a88a93ce847ae4ab029f091a13, type: 3}
-  - {fileID: 7488469549937972830, guid: 3211d3a88a93ce847ae4ab029f091a13, type: 3}
+  - {fileID: -4342424911767312120, guid: 2fca639c4b7748240926c9180c6d9b34, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5216581434543980006, guid: 3211d3a88a93ce847ae4ab029f091a13, type: 3}
+  m_Mesh: {fileID: 7001609335099770725, guid: 2fca639c4b7748240926c9180c6d9b34, type: 3}
 --- !u!114 &4457667804901284210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,3 +113,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 0
   amount: 1
+--- !u!114 &2185552143831696719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539187818613646373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b047e4ef97b7b47802c8436624bccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.7
+  zAxis: 0
+  xAxis: 0
+  yAxis: 1
