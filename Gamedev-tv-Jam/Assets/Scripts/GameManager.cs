@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         player.enabled = false;
-        Debug.Log("You lose! Git gud!");
+        Invoke("GameOverScreen", 2f);
+    }
+    private void GameOverScreen()
+    {
+        FindObjectOfType<GameUIManager>().GammeOverScreen();
     }
 }

@@ -32,12 +32,19 @@ namespace Gamedev.Combat
         #endregion
         #region Special Attack
         [SerializeField] private int energyRequiredForSpecialAttack;
+        [SerializeField] private int dmgModifier=2;
+        [SerializeField] private float dmgIncreaseTime=5f;
+        [SerializeField] private Color specialColor;
+        private Color normalColor;
+        bool canSpecialAttack = true;
+        bool increaseDamage = false;
         #endregion
         #region Jump Attack
         [SerializeField] PunchData jumpingPunch;
         bool canJumpAttack = true;
         #endregion
-        [SerializeField] private GameObject model;
+        [SerializeField] private GameObject modelParent;
+        [SerializeField] private SkinnedMeshRenderer model;
         Animator animator;
 
 
@@ -47,6 +54,7 @@ namespace Gamedev.Combat
         private void Start()
         {
             animator = GetComponentInChildren<Animator>();
+            normalColor = model.materials[1].color;
         }
         private void Update()
         {
@@ -92,16 +100,30 @@ namespace Gamedev.Combat
         public void RangeAttackAnimTrigger()
         {
             var projectile = Instantiate(projectilePrefab, pistolEndTransform.position, projectilePrefab.transform.rotation);
-            projectile.GetComponent<Projectile>().goLeft = model.transform.localRotation.eulerAngles.y >= 180f;
+            projectile.GetComponent<Projectile>().goLeft = modelParent.transform.localRotation.eulerAngles.y >= 180f;
+            if (increaseDamage) projectile.GetComponent<Projectile>().damage *= projectile.GetComponent<Projectile>().damage * dmgModifier;
         }
         public void SpecialAttack()
         {
-            if (GetComponent<Energy>().GetCurrentEnergy() >= energyRequiredForSpecialAttack)
+            if (canSpecialAttack)
             {
-                //Do special attack
-                animator.SetTrigger("specialAttack");
-                GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
+                if (GetComponent<Energy>().GetCurrentEnergy() >= energyRequiredForSpecialAttack)
+                {
+                    canSpecialAttack = false;
+                    StartCoroutine(IncreaseDamage());
+                    animator.SetTrigger("specialAttack");
+                    GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
+                }
             }
+        }
+        private IEnumerator IncreaseDamage()
+        {
+            model.materials[1].color = specialColor;
+            increaseDamage = true;
+            yield return new WaitForSeconds(dmgIncreaseTime);
+            increaseDamage = false;
+            canSpecialAttack = true;
+            model.materials[1].color = normalColor;
         }
         public void Punch_Impact(int punchState)
         {
@@ -134,14 +156,16 @@ namespace Gamedev.Combat
                     Debug.LogError("WTF?");
                     return;
             }
+            if (increaseDamage) damage = damage * dmgModifier;
             var targets =Physics.SphereCastAll(fistPosition, .7f,Vector3.forward);
             foreach(var target in targets)
             {
                 if (target.collider == null) continue;
-                if (target.collider.GetComponent<Health>() == null) continue;
+                var health = target.collider.GetComponent<Health>();
+                if (health == null) continue;
                 if (target.collider.tag == "Player") continue;
-
-                target.collider.GetComponent<Health>().TakeDamage(damage);
+                if (health.IsDead()) continue;
+                health.TakeDamage(damage);
                 GetComponent<Energy>().IncreaseEnergy(energyGained);
             }
             if (punchState == -1) return;

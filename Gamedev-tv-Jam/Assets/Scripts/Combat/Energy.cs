@@ -24,6 +24,7 @@ public class Energy : MonoBehaviour
     public void IncreaseEnergy(int increase)
     {
         currentEnergy += increase;
+        currentEnergy = Mathf.Min(currentEnergy, maxEnergy);
         energyUI.UpdateEnergyBar(maxEnergy, currentEnergy);
     }
 }

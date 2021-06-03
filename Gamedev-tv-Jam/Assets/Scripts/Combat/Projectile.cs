@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private int damage;
+    public int damage;
     [SerializeField] private float speed;
     public bool goLeft;
     // Update is called once per frame
     void Update()
     {
         if (goLeft) {
-            transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - (speed * Time.deltaTime), transform.position.y, transform.position.z);
         }
         else
         {
-            transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
         }
     }
     private void OnTriggerEnter(Collider other)
