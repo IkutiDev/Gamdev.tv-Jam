@@ -22,6 +22,7 @@ public class Stage : MonoBehaviour
     [SerializeField] private GameObject stageClearedText;
     [SerializeField] private bool isFinalStage = false;
     [SerializeField] private int coinsToWin=5;
+    [SerializeField] private GameObject winPanel;
 
     bool checkCoinCount=false;
 
@@ -58,6 +59,10 @@ public class Stage : MonoBehaviour
             CVC.LookAt = null;
             LeftWall.isTrigger = false;
             RightWall.isTrigger = false;
+            if (isFinalStage)
+            {
+                FindObjectOfType<GameUIManager>().WinGame();
+            }
             //Start spawning enemies
             StartCoroutine(WaitUntilEnemiesAreDead());
         }
@@ -129,6 +134,10 @@ public class Stage : MonoBehaviour
     }
     private void Update()
     {
+        if(isFinalStage && winPanel.activeSelf)
+        {
+            return;
+        }
         if (firstTrigger)
         {
             if (enemiesToSpawn.Length == 0)
@@ -146,13 +155,6 @@ public class Stage : MonoBehaviour
                 }
             }
             enemySpawnerTimer += Time.deltaTime;
-        }
-        if (checkCoinCount)
-        {
-            if (FindObjectOfType<CoinCounterUI>().coinCount >= coinsToWin)
-            {
-                FindObjectOfType<GameUIManager>().WinGame();
-            }
         }
     }
     private IEnumerator WaitUntilEnemiesAreDead()
@@ -175,10 +177,6 @@ public class Stage : MonoBehaviour
         CVC.LookAt = alienTransform;
         LeftWall.isTrigger = true;
         RightWall.isTrigger = true;
-        if (isFinalStage)
-        {
-            checkCoinCount = true;
-        }
     }
     private void HideText()
     {
