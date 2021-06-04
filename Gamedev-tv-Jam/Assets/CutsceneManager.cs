@@ -7,6 +7,7 @@ public class CutsceneManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] slides;
     int currentSlide = 0;
+    bool locked=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,14 @@ public class CutsceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxisRaw("Attack") > 0)
+        if(Input.GetAxisRaw("Attack") > 0 && !locked)
         {
+            locked = true;
             GetNextSlide();
+        }
+        if (Input.GetAxisRaw("Attack")==0)
+        {
+            locked = false;
         }
     }
     private void GetNextSlide()
