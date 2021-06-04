@@ -39,6 +39,7 @@ namespace Gamedev.Movement
             animator = GetComponentInChildren<Animator>();
             standardSize = characterCollider.size;
             audioSource = GetComponent<AudioSource>();
+            audioSource.volume = FindObjectOfType<AudioVolume>().volume;
         }
 
         // Update is called once per frame

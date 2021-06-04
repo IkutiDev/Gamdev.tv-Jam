@@ -40,6 +40,7 @@ namespace Gamedev.Combat
         {
             if (healthUI != null) healthUI.Init(maxHealth, currentHealth);
             audioSource = GetComponent<AudioSource>();
+            audioSource.volume = FindObjectOfType<AudioVolume>().volume;
         }
         public void TakeDamage(int damage)
         {
