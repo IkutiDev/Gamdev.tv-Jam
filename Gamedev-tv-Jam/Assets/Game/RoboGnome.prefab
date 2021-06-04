@@ -94,8 +94,10 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   model: {fileID: 727907903465731874}
   deathVFX: {fileID: 0}
-  maxHealth: 80
+  maxHealth: 45
   currentHealth: 0
+  beingHitSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!54 &-3722024246844566164
 Rigidbody:
   m_ObjectHideFlags: 0

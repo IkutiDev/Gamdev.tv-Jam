@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damping: 10
-  speed: 4
+  speed: 2.5
   minDistance: 0.7
   maxDistance: 1
   damage: 15
@@ -116,8 +116,10 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   model: {fileID: 3897514478864849339}
   deathVFX: {fileID: 0}
-  maxHealth: 80
+  maxHealth: 50
   currentHealth: 0
+  beingHitSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!65 &2116428698794961945
 BoxCollider:
   m_ObjectHideFlags: 0

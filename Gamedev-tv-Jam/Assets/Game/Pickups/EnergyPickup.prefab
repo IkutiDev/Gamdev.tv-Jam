@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupType: 2
-  amount: 10
+  amount: 25
 --- !u!114 &2320347595808849609
 MonoBehaviour:
   m_ObjectHideFlags: 0

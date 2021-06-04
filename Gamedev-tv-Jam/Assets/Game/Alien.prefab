@@ -257,17 +257,17 @@ MonoBehaviour:
     energyGained: 5
   punchTwo:
     damage: 10
-    energyGained: 10
+    energyGained: 5
   punchThree:
     damage: 15
-    energyGained: 15
+    energyGained: 10
   pistolEndTransform: {fileID: 292725562}
   projectilePrefab: {fileID: 6199845869457523950, guid: cfb5bdfd8ce4c7248abea8a62668b719, type: 3}
-  rangeAttackCooldown: 5
+  rangeAttackCooldown: 10
   cooldownUI: {fileID: 0}
-  energyRequiredForSpecialAttack: 50
+  energyRequiredForSpecialAttack: 75
   dmgModifier: 2
-  dmgIncreaseTime: 5
+  dmgIncreaseTime: 7
   specialColor: {r: 0.46226418, g: 0.02035121, b: 0.02035121, a: 1}
   jumpingPunch:
     damage: 5
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyUI: {fileID: 0}
-  maxEnergy: 100
+  maxEnergy: 75
   currentEnergy: 0
 --- !u!82 &1348390505
 AudioSource:

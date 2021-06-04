@@ -158,7 +158,7 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   model: {fileID: 1614114554888218228}
   deathVFX: {fileID: 0}
-  maxHealth: 15
+  maxHealth: 16
   currentHealth: 0
   beingHitSound: {fileID: 0}
   deathSound: {fileID: 0}

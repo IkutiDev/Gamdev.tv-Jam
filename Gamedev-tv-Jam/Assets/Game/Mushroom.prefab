@@ -68,7 +68,7 @@ MonoBehaviour:
   healthUI: {fileID: 0}
   model: {fileID: 7512406668085897206}
   deathVFX: {fileID: 0}
-  maxHealth: 70
+  maxHealth: 25
   currentHealth: 0
   beingHitSound: {fileID: 0}
   deathSound: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   damping: 10
   speed: 2
   minDistance: 1
-  maxDistance: 2
+  maxDistance: 1
   damage: 10
   damageTransform: {fileID: 1460284141587600969}
 --- !u!1 &4731650183669021229
