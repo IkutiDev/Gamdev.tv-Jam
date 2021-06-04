@@ -21,6 +21,9 @@ namespace Gamedev.Combat
         [SerializeField] private int maxHealth = 300;
         [ProgressBar("Health", "maxHealth", EColor.Red)]
         [ReadOnly] public int currentHealth;
+        AudioSource audioSource;
+        [SerializeField] private AudioClip beingHitSound;
+        [SerializeField] private AudioClip deathSound;
 
         bool canTakeDamage = true;
         bool isDead=false;
@@ -36,6 +39,7 @@ namespace Gamedev.Combat
         private void Start()
         {
             if (healthUI != null) healthUI.Init(maxHealth, currentHealth);
+            audioSource = GetComponent<AudioSource>();
         }
         public void TakeDamage(int damage)
         {
@@ -50,6 +54,7 @@ namespace Gamedev.Combat
             {
                 if (model != null)
                 {
+                    if (audioSource != null) audioSource.PlayOneShot(beingHitSound);
                     blinkingCoroutine=StartCoroutine(Blinking());
                 }
             }
@@ -63,6 +68,7 @@ namespace Gamedev.Combat
         private void Death()
         {
             //Death anim
+            if (audioSource != null) audioSource.PlayOneShot(deathSound);
             if (blinkingCoroutine!=null)
             {
                 StopCoroutine(blinkingCoroutine);

@@ -8,7 +8,7 @@ public class CoinCounterUI : MonoBehaviour
 
     [SerializeField] private Text coinCounterText;
 
-    int coinCount=0;
+    public int coinCount=0;
 
     private void Start()
     {
