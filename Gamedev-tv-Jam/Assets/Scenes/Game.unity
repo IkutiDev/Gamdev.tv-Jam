@@ -806,7 +806,7 @@ Transform:
   - {fileID: 235272467}
   - {fileID: 1965720523}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &38326714
 PrefabInstance:
@@ -3777,7 +3777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3799540888592756980, guid: 3cad0e63de755984d911ac223d3b8308, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3799540888592756980, guid: 3cad0e63de755984d911ac223d3b8308, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4844,7 +4844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
       propertyPath: enemiesToSpawn.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
       propertyPath: enemySpawnerTimeIntervals
@@ -4866,6 +4866,10 @@ PrefabInstance:
       propertyPath: enemiesToSpawn.Array.data[2]
       value: 
       objectReference: {fileID: 2011060666107079016, guid: aece37772fa581e40b57b8a85d3e30d1, type: 3}
+    - target: {fileID: 513067962046525503, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[3]
+      value: 
+      objectReference: {fileID: 6391935843318291761, guid: e2e5633a8a3e4fa49b3623638fae043c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f4fad3d60af69049ae19314eb54ef6e, type: 3}
 --- !u!1001 &531434576
