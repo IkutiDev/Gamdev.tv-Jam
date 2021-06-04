@@ -61,6 +61,7 @@ namespace Gamedev.Combat
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
+            audioSource.volume = FindObjectOfType<AudioVolume>().volume;
             animator = GetComponentInChildren<Animator>();
             normalColor = model.materials[1].color;
         }
