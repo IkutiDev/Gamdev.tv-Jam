@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject winGamePanel;
     public void TryAgain()
     {
         SceneManager.LoadScene(2);
@@ -19,5 +20,9 @@ public class GameUIManager : MonoBehaviour
     public void GammeOverScreen()
     {
         gameOverPanel.SetActive(true);
+    }
+    public void WinGame()
+    {
+        winGamePanel.SetActive(true);
     }
 }

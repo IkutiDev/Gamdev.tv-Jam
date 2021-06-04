@@ -20,6 +20,10 @@ public class Stage : MonoBehaviour
     [SerializeField] private float enemySpawnerTimeIntervals=5f;
     [SerializeField] private int maxEnemyCount=3;
     [SerializeField] private TMP_Text stageClearedText;
+    [SerializeField] private bool isFinalStage = false;
+    [SerializeField] private int coinsToWin=5;
+
+    bool checkCoinCount=false;
 
     List<Enemy> enemies;
     List<Pickup> pickups;
@@ -143,6 +147,13 @@ public class Stage : MonoBehaviour
             }
             enemySpawnerTimer += Time.deltaTime;
         }
+        if (checkCoinCount)
+        {
+            if (FindObjectOfType<CoinCounterUI>().coinCount >= coinsToWin)
+            {
+                FindObjectOfType<GameUIManager>().WinGame();
+            }
+        }
     }
     private IEnumerator WaitUntilEnemiesAreDead()
     {
@@ -164,6 +175,10 @@ public class Stage : MonoBehaviour
         CVC.LookAt = alienTransform;
         LeftWall.isTrigger = true;
         RightWall.isTrigger = true;
+        if (isFinalStage)
+        {
+            checkCoinCount = true;
+        }
     }
     private void HideText()
     {
