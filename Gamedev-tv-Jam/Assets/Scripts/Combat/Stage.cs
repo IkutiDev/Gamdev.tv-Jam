@@ -19,7 +19,7 @@ public class Stage : MonoBehaviour
     [SerializeField] private Transform[] flyingSpawners;
     [SerializeField] private float enemySpawnerTimeIntervals=5f;
     [SerializeField] private int maxEnemyCount=3;
-    [SerializeField] private TMP_Text stageClearedText;
+    [SerializeField] private GameObject stageClearedText;
     [SerializeField] private bool isFinalStage = false;
     [SerializeField] private int coinsToWin=5;
 
@@ -169,7 +169,7 @@ public class Stage : MonoBehaviour
     }
     private void EnableCameraAndDisableWalls()
     {
-        stageClearedText.enabled = true;
+        stageClearedText.SetActive(true);
         Invoke("HideText", 5f);
         CVC.Follow = alienTransform;
         CVC.LookAt = alienTransform;
@@ -182,6 +182,6 @@ public class Stage : MonoBehaviour
     }
     private void HideText()
     {
-        stageClearedText.enabled = false;
+        stageClearedText.SetActive(false);
     }
 }
