@@ -28,6 +28,8 @@ namespace Gamedev.Movement
         public bool crouch = false;
         bool isFalling = false;
         Vector3 standardSize;
+        AudioSource audioSource;
+        [SerializeField] private AudioClip jumpSound;
         //Movement for left and right + jumping
         // Start is called before the first frame update
         void Start()
@@ -36,6 +38,7 @@ namespace Gamedev.Movement
             characterCollider = GetComponent<BoxCollider>();
             animator = GetComponentInChildren<Animator>();
             standardSize = characterCollider.size;
+            audioSource = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -48,6 +51,7 @@ namespace Gamedev.Movement
             {
                 if (GroundCheck())
                 {
+                    audioSource.PlayOneShot(jumpSound);
                     animator.SetTrigger("jump");
                 }
             }

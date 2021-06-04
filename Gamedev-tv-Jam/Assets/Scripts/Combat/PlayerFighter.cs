@@ -47,12 +47,20 @@ namespace Gamedev.Combat
         [SerializeField] private SkinnedMeshRenderer model;
         Animator animator;
 
+        AudioSource audioSource;
+
+        [SerializeField] private AudioClip jumpHit;
+        [SerializeField] private AudioClip hit1;
+        [SerializeField] private AudioClip hit2;
+        [SerializeField] private AudioClip hit3;
+        [SerializeField] private AudioClip rangeAttack;
+        [SerializeField] private AudioClip specialAttack;
 
 
-        
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             animator = GetComponentInChildren<Animator>();
             normalColor = model.materials[1].color;
         }
@@ -65,8 +73,23 @@ namespace Gamedev.Combat
         {
             if (canAttack)
             {
+                //audioSource.clip = clip;
+                
+                
                 canAttack = false;
                 punchState++;
+                switch (punchState)
+                {
+                    case 1:
+                        audioSource.PlayOneShot(hit1);
+                        break;
+                    case 2:
+                        audioSource.PlayOneShot(hit2);
+                        break;
+                    case 3:
+                        audioSource.PlayOneShot(hit3);
+                        break;
+                }
                 animator.SetInteger("punch", punchState);
             }
         }
@@ -74,6 +97,7 @@ namespace Gamedev.Combat
         {
             if (canJumpAttack)
             {
+                audioSource.PlayOneShot(jumpHit);
                 canJumpAttack = false;
                 animator.SetTrigger("jumpingAttack");
             }
@@ -94,6 +118,7 @@ namespace Gamedev.Combat
             if (rangeAttackTimer > rangeAttackCooldown)
             {
                 rangeAttackTimer = 0f;
+                audioSource.PlayOneShot(rangeAttack);
                 animator.SetTrigger("rangeAttack");
             }
         }
@@ -111,6 +136,7 @@ namespace Gamedev.Combat
                 {
                     canSpecialAttack = false;
                     StartCoroutine(IncreaseDamage());
+                    audioSource.PlayOneShot(specialAttack);
                     animator.SetTrigger("specialAttack");
                     GetComponent<Energy>().IncreaseEnergy(-energyRequiredForSpecialAttack);
                 }
@@ -168,6 +194,7 @@ namespace Gamedev.Combat
                 health.TakeDamage(damage);
                 GetComponent<Energy>().IncreaseEnergy(energyGained);
             }
+
             if (punchState == -1) return;
             Next();
 

@@ -25,6 +25,7 @@ namespace Gamedev.Pickups
                 {
                     case PickupType.Coin:
                         FindObjectOfType<CoinCounterUI>().IncreaseCointCount();
+                        GetComponent<AudioSource>().Play();
                         break;
                     case PickupType.Health:
                         other.GetComponent<Health>().Heal(amount);
