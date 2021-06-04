@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlying: 0
+  shouldDrop: 1
+  shouldCount: 1
   enemyStage: {fileID: 0}
 --- !u!114 &2161919206603518525
 MonoBehaviour:
@@ -68,6 +70,8 @@ MonoBehaviour:
   deathVFX: {fileID: 0}
   maxHealth: 70
   currentHealth: 0
+  beingHitSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!65 &7976273804405377751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damping: 10
   speed: 2
-  minDistance: 2
+  minDistance: 1
   maxDistance: 2
   damage: 10
   damageTransform: {fileID: 1460284141587600969}

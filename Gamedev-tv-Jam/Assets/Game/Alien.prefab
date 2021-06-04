@@ -260,7 +260,7 @@ MonoBehaviour:
     energyGained: 10
   punchThree:
     damage: 15
-    energyGained: 10
+    energyGained: 15
   pistolEndTransform: {fileID: 292725562}
   projectilePrefab: {fileID: 6199845869457523950, guid: cfb5bdfd8ce4c7248abea8a62668b719, type: 3}
   rangeAttackCooldown: 5
