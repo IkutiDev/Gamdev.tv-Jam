@@ -8,7 +8,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     public void TryAgain()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void MainMenu()
